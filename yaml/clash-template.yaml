@@ -108,6 +108,8 @@ rule-providers:
 
 rules:
   - "DOMAIN-SUFFIX,superfj.com,🎯 全球直连"
+  - "IP-CIDR,207.57.123.187/32,🎯 全球直连,no-resolve"
+  - "IP-CIDR,2001:df1:7880:6::c4/128,🎯 全球直连,no-resolve"
   - "RULE-SET,LocalAreaNetwork,🎯 全球直连"
   - "RULE-SET,UnBan,🎯 全球直连"
   - "RULE-SET,BanAD,🛑 广告拦截"
