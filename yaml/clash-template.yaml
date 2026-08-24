@@ -56,17 +56,17 @@ rule-providers:
     interval: 86400
     format: text
     type: http
-  GoogleFCM:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Ruleset/GoogleFCM.list
-    path: ./ruleset/GoogleFCM.list
+  GoogleSite:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geosite/google.list
+    path: ./ruleset/geosite-google.list
     behavior: classical
     interval: 86400
     format: text
     type: http
-  GoogleCN:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/GoogleCN.list
-    path: ./ruleset/GoogleCN.list
-    behavior: classical
+  GoogleIP:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/google.list
+    path: ./ruleset/geoip-google.list
+    behavior: ipcidr
     interval: 86400
     format: text
     type: http
@@ -111,8 +111,8 @@ rules:
   - "RULE-SET,LocalAreaNetwork,🎯 全球直连"
   - "RULE-SET,UnBan,🎯 全球直连"
   - "RULE-SET,BanAD,🛑 广告拦截"
-  - "RULE-SET,GoogleFCM,📢 谷歌服务"
-  - "RULE-SET,GoogleCN,🎯 全球直连"
+  - "RULE-SET,GoogleSite,📢 谷歌服务"
+  - "RULE-SET,GoogleIP,📢 谷歌服务"
   - "RULE-SET,SteamCN,🎯 全球直连"
   - "RULE-SET,ProxyGFWlist,🚀 节点选择"
   - "RULE-SET,ChinaDomain,🎯 全球直连"
