@@ -111,6 +111,7 @@ rules:
   - "RULE-SET,LocalAreaNetwork,🎯 全球直连"
   - "RULE-SET,UnBan,🎯 全球直连"
   - "RULE-SET,BanAD,🛑 广告拦截"
+  - "DOMAIN-SUFFIX,google.com,📢 谷歌服务"
   - "RULE-SET,GoogleSite,📢 谷歌服务"
   - "RULE-SET,GoogleIP,📢 谷歌服务"
   - "RULE-SET,SteamCN,🎯 全球直连"
