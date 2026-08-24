@@ -57,14 +57,14 @@ rule-providers:
     format: text
     type: http
   GoogleSite:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geosite/google.list
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.list
     path: ./ruleset/geosite-google.list
     behavior: classical
     interval: 86400
     format: text
     type: http
   GoogleIP:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo-lite/geoip/google.list
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.list
     path: ./ruleset/geoip-google.list
     behavior: ipcidr
     interval: 86400
