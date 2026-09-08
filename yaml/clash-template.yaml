@@ -1,107 +1,74 @@
 proxy-groups:
   - name: 🚀 节点选择
     type: select
-    include-all: true
-    proxies:
-      - ♻️ 自动选择
-      - DIRECT
-  - name: ♻️ 自动选择
-    type: url-test
-    include-all: true
     interval: 300
-    tolerance: 50
-  - name: 📢 谷歌服务
-    type: select
-    include-all: true
+    timeout: 5000
+    max-failed-times: 5
+    lazy: true
+    include-all-proxies: true
     proxies:
-      - DIRECT
-      - ♻️ 自动选择
+      - 🎈 自动选择
+  - name: 🎈 自动选择
+    type: url-test
+    interval: 300
+    timeout: 5000
+    max-failed-times: 5
+    lazy: true
+    url: http://www.gstatic.com/generate_204
+    include-all-proxies: true
+    proxies: []
   - name: 🎯 全球直连
     type: select
+    interval: 300
+    timeout: 5000
+    max-failed-times: 5
+    lazy: true
+    include-all-proxies: false
     proxies:
       - DIRECT
-      - 🚀 节点选择
-      - ♻️ 自动选择
-  - name: 🛑 广告拦截
+  - name: 🛑 全球拦截
     type: select
+    interval: 300
+    timeout: 5000
+    max-failed-times: 5
+    lazy: true
+    include-all-proxies: false
     proxies:
       - REJECT
-      - DIRECT
-  - name: 🐟 漏网之鱼
-    type: select
-    proxies:
-      - 🚀 节点选择
-      - ♻️ 自动选择
-      - DIRECT
 
 rule-providers:
-  LocalAreaNetwork:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/LocalAreaNetwork.list
-    path: ./ruleset/LocalAreaNetwork.list
-    behavior: classical
-    interval: 86400
-    format: text
-    type: http
-  UnBan:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/UnBan.list
-    path: ./ruleset/UnBan.list
-    behavior: classical
-    interval: 86400
-    format: text
-    type: http
-  BanAD:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/BanAD.list
-    path: ./ruleset/BanAD.list
-    behavior: classical
-    interval: 86400
-    format: text
-    type: http
-  GoogleSite:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.list
-    path: ./ruleset/geosite-google.list
-    behavior: classical
-    interval: 86400
-    format: text
-    type: http
-  GoogleIP:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/google.list
-    path: ./ruleset/geoip-google.list
+  private:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.list
+    path: ./ruleset/private.list
     behavior: ipcidr
     interval: 86400
     format: text
     type: http
-  SteamCN:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Ruleset/SteamCN.list
-    path: ./ruleset/SteamCN.list
-    behavior: classical
+  category-ads-all:
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ads-all.list
+    path: ./ruleset/category-ads-all.list
+    behavior: domain
     interval: 86400
     format: text
     type: http
   ProxyGFWlist:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/ProxyGFWlist.list
-    path: ./ruleset/ProxyGFWlist.list
-    behavior: classical
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/gfw.list
+    path: ./ruleset/gfw.list
+    behavior: domain
     interval: 86400
     format: text
     type: http
   ChinaDomain:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/ChinaDomain.list
-    path: ./ruleset/ChinaDomain.list
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.list
+    path: ./ruleset/cn.list
     behavior: domain
     interval: 86400
     format: text
     type: http
   ChinaCompanyIp:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/ChinaCompanyIp.list
-    path: ./ruleset/ChinaCompanyIp.list
+    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.list
+    path: ./ruleset/cn-ip.list
     behavior: ipcidr
-    interval: 86400
-    format: text
-    type: http
-  Download:
-    url: https://testingcf.jsdelivr.net/gh/ACL4SSR/ACL4SSR@master/Clash/Download.list
-    path: ./ruleset/Download.list
-    behavior: classical
     interval: 86400
     format: text
     type: http
@@ -110,16 +77,10 @@ rules:
   - "DOMAIN-SUFFIX,superfj.com,🎯 全球直连"
   - "IP-CIDR,207.57.123.187/32,🎯 全球直连,no-resolve"
   - "IP-CIDR,2001:df1:7880:6::c4/128,🎯 全球直连,no-resolve"
-  - "RULE-SET,LocalAreaNetwork,🎯 全球直连"
-  - "RULE-SET,UnBan,🎯 全球直连"
-  - "RULE-SET,BanAD,🛑 广告拦截"
-  - "DOMAIN-SUFFIX,google.com,📢 谷歌服务"
-  - "RULE-SET,GoogleSite,📢 谷歌服务"
-  - "RULE-SET,GoogleIP,📢 谷歌服务"
-  - "RULE-SET,SteamCN,🎯 全球直连"
+  - "RULE-SET,private,🎯 全球直连"
+  - "RULE-SET,category-ads-all,🛑 全球拦截"
   - "RULE-SET,ProxyGFWlist,🚀 节点选择"
   - "RULE-SET,ChinaDomain,🎯 全球直连"
   - "RULE-SET,ChinaCompanyIp,🎯 全球直连"
-  - "RULE-SET,Download,🎯 全球直连"
   - "GEOIP,CN,🎯 全球直连"
-  - "MATCH,🐟 漏网之鱼"
+  - "MATCH,🚀 节点选择"
