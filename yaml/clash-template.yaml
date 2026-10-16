@@ -1,3 +1,25 @@
+dns:
+  enable: true
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 223.6.6.6
+  nameserver:
+    - https://dns.google/dns-query
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://dns.google/dns-query
+  nameserver-policy:
+    "rule-set:GeoSite-CN":
+      - https://dns.alidns.com/dns-query
+    "rule-set:GeoSite-Geolocation-CN":
+      - https://dns.alidns.com/dns-query
+    "rule-set:GFW":
+      - https://dns.google/dns-query
+    "rule-set:GeoSite-Geolocation-Non-CN":
+      - https://dns.google/dns-query
+  respect-rules: true
+
 proxy-groups:
   - name: 🚀 节点选择
     type: select
@@ -38,48 +60,68 @@ proxy-groups:
 
 rule-providers:
   GeoIP-Private:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/private.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs
     path: ./ruleset/private.mrs
     behavior: ipcidr
     interval: 86400
-    format: text
+    format: mrs
     type: http
+    proxy: 🚀 节点选择
   GeoSite-Category-Ads-All:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ads-all.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ads-all.mrs
     path: ./ruleset/category-ads-all.mrs
     behavior: domain
     interval: 86400
-    format: text
+    format: mrs
     type: http
+    proxy: 🚀 节点选择
   GFW:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/gfw.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs
     path: ./ruleset/gfw.mrs
     behavior: domain
     interval: 86400
-    format: text
+    format: mrs
     type: http
+    proxy: 🚀 节点选择
   GeoSite-CN:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
     path: ./ruleset/cn.mrs
     behavior: domain
     interval: 86400
-    format: text
+    format: mrs
     type: http
+    proxy: 🚀 节点选择
+  GeoSite-Geolocation-CN:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-cn.mrs
+    path: ./ruleset/geolocation-cn.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+    proxy: 🚀 节点选择
+  GeoSite-Geolocation-Non-CN:
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs
+    path: ./ruleset/geolocation-non-cn.mrs
+    behavior: domain
+    interval: 86400
+    format: mrs
+    type: http
+    proxy: 🚀 节点选择
   GeoIP-CN:
-    url: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geoip/cn.mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
     path: ./ruleset/cn-ip.mrs
     behavior: ipcidr
     interval: 86400
-    format: text
+    format: mrs
     type: http
+    proxy: 🚀 节点选择
 
 rules:
-  - "DOMAIN-SUFFIX,superfj.com,🎯 全球直连"
-  - "IP-CIDR,207.57.123.187/32,🎯 全球直连,no-resolve"
-  - "IP-CIDR,2001:df1:7880:6::c4/128,🎯 全球直连,no-resolve"
   - "RULE-SET,GeoIP-Private,🎯 全球直连"
   - "RULE-SET,GeoSite-Category-Ads-All,🛑 全球拦截"
   - "RULE-SET,GeoSite-CN,🎯 全球直连"
+  - "RULE-SET,GeoSite-Geolocation-CN,🎯 全球直连"
   - "RULE-SET,GeoIP-CN,🎯 全球直连"
   - "RULE-SET,GFW,🚀 节点选择"
+  - "RULE-SET,GeoSite-Geolocation-Non-CN,🚀 节点选择"
   - "MATCH,🚀 节点选择"
