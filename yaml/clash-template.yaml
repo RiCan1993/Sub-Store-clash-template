@@ -1,6 +1,6 @@
 dns:
   enable: true
-  ipv6: false
+  ipv6: true
   default-nameserver:
     - 223.5.5.5
     - 223.6.6.6
